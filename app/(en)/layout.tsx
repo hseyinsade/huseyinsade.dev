@@ -1,6 +1,6 @@
-import { metadataFor, RootShell } from "@/components/root-shell";
+import { metadataFor, RootShell } from "@/components/templates/RootShell";
 
-export { viewport } from "@/components/root-shell";
+export { viewport } from "@/components/templates/RootShell";
 export const metadata = metadataFor("en");
 
 export default function EnglishLayout({ children }: { children: React.ReactNode }) {

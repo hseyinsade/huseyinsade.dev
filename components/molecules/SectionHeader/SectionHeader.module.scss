@@ -1,0 +1,40 @@
+@use "../../../styles/mixins" as *;
+
+.header {
+  display: grid;
+  gap: 1rem;
+  margin-bottom: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+
+  @include md {
+    grid-template-columns: 3fr 9fr;
+    margin-bottom: 4rem;
+  }
+}
+
+.index {
+  @include eyebrow;
+
+  span {
+    color: var(--accent-ink);
+  }
+}
+
+.title {
+  font-size: 2.25rem;
+  line-height: 1.05;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+
+  @include sm {
+    font-size: 3rem;
+  }
+}
+
+.sub {
+  max-width: 36rem;
+  margin-top: 0.75rem;
+  color: var(--muted);
+}

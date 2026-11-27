@@ -1,0 +1,78 @@
+@use "../../../styles/mixins" as *;
+
+.banner {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  left: 1rem;
+  z-index: 45;
+  max-width: 24rem;
+  padding: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 1rem;
+  background: var(--surface);
+  box-shadow: 0 24px 60px -24px rgb(0 0 0 / 0.5);
+  animation: rise 0.4s $ease-out;
+
+  @include sm {
+    left: auto;
+  }
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+.title {
+  @include eyebrow;
+  color: var(--accent-ink);
+}
+
+.text {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  button {
+    height: 2.25rem;
+    padding-inline: 1rem;
+    border-radius: 999px;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    transition:
+      transform 0.15s,
+      border-color 0.15s;
+  }
+}
+
+.reject {
+  border: 1px solid var(--line);
+
+  &:hover {
+    border-color: var(--fg);
+  }
+}
+
+.accept {
+  background: var(--fg);
+  color: var(--bg);
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}

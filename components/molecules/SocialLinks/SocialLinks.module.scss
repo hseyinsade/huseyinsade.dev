@@ -1,0 +1,19 @@
+.list {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.link {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  color: var(--muted);
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--fg);
+  }
+}

@@ -2,7 +2,7 @@
 
 Personal site of Huseyin Sade — Frontend Developer.
 
-Built with **Next.js 16.4.6 (App Router)**, **TypeScript** and **SCSS Modules**, exported as a fully static site.
+Built with **Next.js 16.4.6 (App Router)**, **React 19**, **TypeScript** and **SCSS Modules**, exported as a fully static site. Tested with **Vitest** and **Testing Library**.
 
 ## Features
 
@@ -13,13 +13,51 @@ Built with **Next.js 16.4.6 (App Router)**, **TypeScript** and **SCSS Modules**,
 - SEO / AEO: per-language titles and descriptions, hreflang, JSON-LD `ProfilePage` + `Person` (`lib/seo.ts`), generated `robots.txt`, `sitemap.xml`, `llms.txt`, and Open Graph images (`/og-en.png`, `/og-tr.png`, `/og-de.png`, rendered at build time from `lib/og.tsx`)
 - Analytics: Google Tag Manager with Consent Mode v2 and a consent banner; named `dataLayer` events for clicks and section views — setup guide in [`docs/analytics.md`](docs/analytics.md)
 - All content lives in [`lib/content.ts`](lib/content.ts)
-- Styles: global tokens and reset in `styles/globals.scss`, shared mixins in `styles/_mixins.scss`, one `*.module.scss` per component
+- Styles: global tokens and reset in `styles/globals.scss`, shared mixins in `styles/_mixins.scss`, one `*.module.scss` per component — no inline styles (a test checks every page)
+
+## Structure
+
+Components follow [atomic design](https://atomicdesign.bradfrost.com/). Each lives in its own folder with its styles, tests and an `index.ts`:
+
+```
+components/
+  atoms/        Icon, Tag, Reveal
+  molecules/    TagList, SectionHeader, CopyButton, Clock, LanguageSwitch, ThemeToggle,
+                InspectToggle, SocialLinks, Waveform, VideoPlayer, ProjectCard, ProjectRow,
+                JobItem, StackGroup
+  organisms/    Nav, Hero, CodeCard, Work, Experience, Stack, Contact, Footer,
+                Inspector, ConsentBanner
+  templates/    HomePage, RootShell
+  providers/    SiteProvider (language, theme, inspect mode), Analytics
+lib/            content, SEO, analytics and small helpers (date, cx, selector)
+test/           Vitest setup and render helpers
+```
+
+```
+components/molecules/CopyButton/
+  CopyButton.tsx
+  CopyButton.module.scss
+  CopyButton.test.tsx
+  index.ts
+```
+
+Molecules take data through props; organisms read the site context (`useSite`) and pass it down.
 
 ## Develop
+
+Requires Node 22.12+ or 24 (see `.nvmrc`).
 
 ```bash
 npm install
 npm run dev
+```
+
+## Test
+
+```bash
+npm test             # run once
+npm run test:watch   # re-run on change
+npm run typecheck
 ```
 
 ## Build

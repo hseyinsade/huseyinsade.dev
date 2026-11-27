@@ -1,0 +1,69 @@
+@use "../../../styles/mixins" as *;
+
+.row {
+  display: grid;
+  gap: 0.75rem 1.5rem;
+  padding-block: 1.75rem;
+  border-bottom: 1px solid var(--line);
+
+  @include md {
+    grid-template-columns: 1fr 4fr 4fr 3fr;
+    align-items: baseline;
+  }
+}
+
+.index {
+  @include mono;
+  font-size: 0.75rem;
+  color: var(--faint);
+}
+
+.name {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.5rem;
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.33;
+
+  > span {
+    background: linear-gradient(var(--accent), var(--accent)) left bottom / 0% 35% no-repeat;
+    transition: background-size 0.5s;
+  }
+
+  svg {
+    color: var(--muted);
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  .row:hover & {
+    > span {
+      background-size: 100% 35%;
+    }
+    svg {
+      opacity: 1;
+    }
+  }
+}
+
+.meta {
+  margin-top: 0.25rem;
+  @include mono;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.description {
+  font-size: 0.875rem;
+  line-height: 1.625;
+  text-wrap: pretty;
+  color: var(--muted);
+}
+
+.tags {
+  @include md {
+    justify-content: flex-end;
+  }
+}

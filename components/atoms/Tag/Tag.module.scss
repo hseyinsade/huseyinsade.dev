@@ -1,0 +1,12 @@
+@use "../../../styles/mixins" as *;
+
+.tag {
+  @include mono;
+  padding: 0.125rem 0.625rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-size: 11px;
+  line-height: 1.6;
+  white-space: nowrap;
+  color: var(--muted);
+}

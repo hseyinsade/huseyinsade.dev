@@ -1,0 +1,20 @@
+@use "../../../styles/mixins" as *;
+
+.section {
+  @include container;
+  @include section-spacing;
+}
+
+.featured {
+  display: grid;
+  gap: 1.25rem;
+
+  @include md {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.list {
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--line);
+}

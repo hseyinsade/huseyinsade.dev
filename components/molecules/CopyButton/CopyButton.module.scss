@@ -1,0 +1,20 @@
+@use "../../../styles/mixins" as *;
+
+.button {
+  display: inline-flex;
+  height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1.25rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--bg);
+  @include mono;
+  font-size: 0.75rem;
+  color: var(--muted);
+  transition: color 0.15s;
+
+  &:hover {
+    color: var(--fg);
+  }
+}

@@ -1,0 +1,84 @@
+@use "../../../styles/mixins" as *;
+
+.player {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  @include mono;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+.live {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+
+  &::before {
+    content: "";
+    width: 0.375rem;
+    height: 0.375rem;
+    border-radius: 50%;
+    background: #ef4444;
+  }
+}
+
+.track {
+  position: relative;
+  height: 0.25rem;
+  border-radius: 999px;
+  background: var(--line);
+}
+
+.buffered,
+.progress {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  border-radius: 999px;
+}
+
+.buffered {
+  width: 78%;
+  background: alpha(--fg, 15%);
+}
+
+.progress {
+  background: var(--fg);
+  animation: progress 9s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate;
+
+  @include reduced-motion {
+    width: 72%;
+    animation: none;
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.time {
+  margin-left: auto;
+  @include mono;
+  font-size: 10px;
+  color: var(--muted);
+}
+
+@keyframes progress {
+  from {
+    width: 8%;
+  }
+  to {
+    width: 72%;
+  }
+}

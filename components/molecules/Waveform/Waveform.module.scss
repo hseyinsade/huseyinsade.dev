@@ -1,0 +1,46 @@
+@use "sass:math";
+@use "../../../styles/mixins" as *;
+
+$bars: 48; // keep in sync with BAR_COUNT
+$played: 30; // bars before the playhead are fully opaque
+
+.wave {
+  display: flex;
+  height: 100%;
+  align-items: flex-end;
+  gap: 3px;
+}
+
+.bar {
+  width: 100%;
+  border-radius: 999px;
+  background: alpha(--fg, 80%);
+  transform-origin: bottom;
+  animation: wave 1.4s ease-in-out infinite;
+
+  // A fixed, natural-looking pattern: 25–100% height, staggered in groups of 12.
+  @for $i from 0 to $bars {
+    &:nth-child(#{$i + 1}) {
+      height: math.round((0.25 + math.abs(math.sin($i * 0.55) * math.cos($i * 0.21)) * 0.75) * 100%);
+      animation-delay: ($i % 12) * 90ms;
+    }
+  }
+
+  &:nth-child(n + #{$played + 1}) {
+    opacity: 0.25;
+  }
+
+  @include reduced-motion {
+    animation: none;
+  }
+}
+
+@keyframes wave {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  50% {
+    transform: scaleY(0.45);
+  }
+}

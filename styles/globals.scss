@@ -161,20 +161,6 @@ body {
   mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 40%, transparent 100%);
 }
 
-/* Scroll reveal */
-.reveal {
-  opacity: 0;
-  transform: translateY(14px);
-  transition:
-    opacity 0.7s $ease-out,
-    transform 0.7s $ease-out;
-
-  &.is-visible {
-    opacity: 1;
-    transform: none;
-  }
-}
-
 @keyframes blink {
   50% {
     opacity: 0;
@@ -203,11 +189,6 @@ body {
 @include reduced-motion {
   html {
     scroll-behavior: auto;
-  }
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
   }
   .live-dot {
     animation: none;

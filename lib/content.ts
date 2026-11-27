@@ -509,7 +509,9 @@ export const jobs: Job[] = [
   },
 ];
 
-export const stack: { group: T; items: string[]; wide?: boolean }[] = [
+export type StackGroup = { group: T; items: string[]; wide?: boolean };
+
+export const stack: StackGroup[] = [
   {
     group: { en: "Languages & frameworks", tr: "Diller ve framework'ler", de: "Sprachen & Frameworks" },
     items: ["TypeScript", "JavaScript", "React", "Next.js", "Vue 3", "Angular", "React Native", "Tauri", "Rust", ".NET", "Django"],
