@@ -1,0 +1,70 @@
+// Breakpoints (mobile-first)
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+
+@mixin sm {
+  @media (min-width: $bp-sm) {
+    @content;
+  }
+}
+@mixin md {
+  @media (min-width: $bp-md) {
+    @content;
+  }
+}
+@mixin lg {
+  @media (min-width: $bp-lg) {
+    @content;
+  }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// Typography helpers
+@mixin mono {
+  font-family: var(--font-mono);
+}
+@mixin serif {
+  font-family: var(--font-serif);
+}
+
+@mixin eyebrow {
+  @include mono;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+// Layout
+@mixin container {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+
+  @include sm {
+    padding-inline: 1.5rem;
+  }
+}
+
+@mixin section-spacing {
+  padding-block: 5rem;
+
+  @include md {
+    padding-block: 7rem;
+  }
+}
+
+// Color with alpha from a CSS variable
+@function alpha($var, $percent) {
+  @return color-mix(in srgb, var(#{$var}) $percent, transparent);
+}
+
+// Shared easing
+$ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
