@@ -1,6 +1,6 @@
 "use client";
 
-import { projects, ui, type Project } from "@/lib/content";
+import { projects, text, ui, type Project } from "@/lib/content";
 import { useSite } from "./providers";
 import { ArrowUpRight, Reveal, SectionHeader, Tags } from "./ui";
 import s from "./work.module.scss";
@@ -48,7 +48,7 @@ function Player() {
 }
 
 function FeaturedCard({ p, index }: { p: Project; index: number }) {
-  const { t } = useSite();
+  const { t, lang } = useSite();
   return (
     <Reveal as="article" delay={index * 80} className={s.card}>
       <div className={s.visual}>
@@ -59,7 +59,7 @@ function FeaturedCard({ p, index }: { p: Project; index: number }) {
         <div className={s.head}>
           <div>
             <p className={s.meta}>
-              {String(index + 1).padStart(2, "0")} · {p.company}
+              {String(index + 1).padStart(2, "0")} · {text(p.company, lang)}
             </p>
             <h3 className={s.name}>{p.name}</h3>
             <p className={s.category}>{t(p.category)}</p>
@@ -79,7 +79,7 @@ function FeaturedCard({ p, index }: { p: Project; index: number }) {
 }
 
 function ProjectRow({ p, index }: { p: Project; index: number }) {
-  const { t } = useSite();
+  const { t, lang } = useSite();
   const Wrapper = p.url ? "a" : "div";
   return (
     <Reveal as="li" delay={(index % 3) * 60}>
@@ -94,7 +94,7 @@ function ProjectRow({ p, index }: { p: Project; index: number }) {
             {p.url && <ArrowUpRight />}
           </h3>
           <p className={s.rowMeta}>
-            {t(p.category)} · {p.company}
+            {t(p.category)} · {text(p.company, lang)}
           </p>
         </div>
         <p className={s.rowDescription}>{t(p.description)}</p>

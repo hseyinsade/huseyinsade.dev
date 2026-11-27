@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
-import { profile } from "@/lib/content";
+import { yearsOfExperience } from "@/lib/content";
 import { cx } from "./ui";
 import s from "./code-card.module.scss";
 
@@ -67,10 +67,10 @@ const tools = ["Claude Code", "Codex"];
 const snippets: Snippet[] = [
   {
     id: "tsx",
-    file: "huseyin.tsx",
+    file: "sade.tsx",
     lang: "TSX",
     lines: [
-      [["kw", "export const "], ["comp", "Huseyin"], ["dim", " = () "], ["kw", "=>"], ["dim", " ("]],
+      [["kw", "export const "], ["comp", "Sade"], ["dim", " = () "], ["kw", "=>"], ["dim", " ("]],
       [["dim", "  <"], ["comp", "Developer"]],
       [["prop", "    role"], ["dim", "="], str("Frontend")],
       [["prop", "    based"], ["dim", "="], str("Istanbul, TR")],
@@ -85,10 +85,10 @@ const snippets: Snippet[] = [
   },
   {
     id: "js",
-    file: "huseyin.js",
+    file: "sade.js",
     lang: "JavaScript",
     lines: [
-      [["kw", "const "], ["comp", "huseyin"], ["dim", " = {"]],
+      [["kw", "const "], ["comp", "sade"], ["dim", " = {"]],
       [["prop", "  role"], ["dim", ": "], str("Frontend"), ["dim", ","]],
       [["prop", "  based"], ["dim", ": "], str("Istanbul, TR"), ["dim", ","]],
       [["prop", "  stack"], ["dim", ": ["], ...list(stack), ["dim", "],"]],
@@ -98,12 +98,12 @@ const snippets: Snippet[] = [
       [["prop", "  focus"], ["dim", ": "], ["focus", '"'], ["dim", ","]],
       [["dim", "};"]],
       [],
-      [["kw", "export default "], ["comp", "huseyin"], ["dim", ";"]],
+      [["kw", "export default "], ["comp", "sade"], ["dim", ";"]],
     ],
   },
   {
     id: "vue",
-    file: "Huseyin.vue",
+    file: "Sade.vue",
     lang: "Vue",
     lines: [
       [["dim", "<"], ["kw", "template"], ["dim", ">"]],
@@ -121,11 +121,11 @@ const snippets: Snippet[] = [
   },
   {
     id: "angular",
-    file: "huseyin.ts",
+    file: "sade.ts",
     lang: "Angular",
     lines: [
-      [["kw", "@Component"], ["dim", "({ "], ["prop", "selector"], ["dim", ": "], str("app-huseyin", "'"), ["dim", " })"]],
-      [["kw", "export class "], ["comp", "Huseyin"], ["dim", " {"]],
+      [["kw", "@Component"], ["dim", "({ "], ["prop", "selector"], ["dim", ": "], str("app-sade", "'"), ["dim", " })"]],
+      [["kw", "export class "], ["comp", "Sade"], ["dim", " {"]],
       [["prop", "  role"], ["dim", " = "], str("Frontend", "'"), ["dim", ";"]],
       [["prop", "  based"], ["dim", " = "], str("Istanbul, TR", "'"), ["dim", ";"]],
       [["prop", "  stack"], ["dim", " = ["], ...list(stack, "'"), ["dim", "];"]],
@@ -142,7 +142,7 @@ const maxLines = Math.max(...snippets.map((sn) => sn.lines.length));
 
 export function CodeCard() {
   const focus = useTypewriter(focusWords);
-  const years = new Date().getFullYear() - profile.startYear;
+  const years = yearsOfExperience;
   const [active, setActive] = useState(0);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const baseId = useId();

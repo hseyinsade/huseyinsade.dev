@@ -1,4 +1,4 @@
-import { education, jobs, languages, profile, projects, stack, ui, type Lang } from "./content";
+import { education, jobs, languages, profile, projects, stack, ui, yearsOfExperience, type Lang } from "./content";
 
 export const siteUrl = "https://huseyinsade.dev";
 
@@ -16,19 +16,19 @@ export const pageMeta: Record<Lang, { title: string; description: string; locale
   en: {
     title: "Huseyin Sade — Frontend Developer (React, Next.js) · Istanbul",
     description:
-      "Huseyin Sade is a frontend developer in Istanbul with 7+ years of experience building streaming, e-commerce and telecom products with React, Next.js and TypeScript. Currently at Atmosware (Turkcell Group) working on fizy.",
+      `Huseyin Sade is a frontend developer in Istanbul with ${yearsOfExperience}+ years of experience building streaming, e-commerce and telecom products with React, Next.js and TypeScript. Currently at Atmosware (Turkcell Group) working on fizy.`,
     locale: "en_US",
   },
   tr: {
     title: "Huseyin Sade — Frontend Developer (React, Next.js) · İstanbul",
     description:
-      "Huseyin Sade, React, Next.js ve TypeScript ile yayın, e-ticaret ve telekom ürünleri geliştiren, 7+ yıl deneyimli İstanbul'da bir frontend developer. Şu an Atmosware'de (Turkcell Grubu) fizy üzerinde çalışıyor.",
+      `Huseyin Sade, React, Next.js ve TypeScript ile yayın, e-ticaret ve telekom ürünleri geliştiren, ${yearsOfExperience}+ yıl deneyimli İstanbul'da bir frontend developer. Şu an Atmosware'de (Turkcell Grubu) fizy üzerinde çalışıyor.`,
     locale: "tr_TR",
   },
   de: {
     title: "Huseyin Sade — Frontend Developer (React, Next.js) · Istanbul",
     description:
-      "Huseyin Sade ist Frontend Developer in Istanbul mit über 7 Jahren Erfahrung in Streaming-, E-Commerce- und Telekommunikationsprodukten mit React, Next.js und TypeScript. Derzeit bei Atmosware (Turkcell-Gruppe) an fizy tätig.",
+      `Huseyin Sade ist Frontend Developer in Istanbul mit über ${yearsOfExperience} Jahren Erfahrung in Streaming-, E-Commerce- und Telekommunikationsprodukten mit React, Next.js und TypeScript. Derzeit bei Atmosware (Turkcell-Gruppe) an fizy tätig.`,
     locale: "de_DE",
   },
 };
@@ -60,7 +60,7 @@ export function profileJsonLd(lang: Lang) {
       name: "Istanbul, Türkiye",
       address: { "@type": "PostalAddress", addressLocality: "Istanbul", addressCountry: "TR" },
     },
-    alumniOf: education.map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
+    alumniOf: education.filter((e) => !e.ongoing).map((e) => ({ "@type": "CollegeOrUniversity", name: e.school })),
     hasCredential: {
       "@type": "EducationalOccupationalCredential",
       credentialCategory: "degree",

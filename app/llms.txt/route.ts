@@ -1,4 +1,4 @@
-import { education, jobs, languages, profile, projects, stack } from "@/lib/content";
+import { education, jobs, languages, profile, projects, stack, text } from "@/lib/content";
 import { langPath, pageMeta, siteUrl } from "@/lib/seo";
 
 export const dynamic = "force-static";
@@ -36,7 +36,7 @@ ${jobs
 ## Projects
 
 ${projects
-  .map((p) => `- [${p.name}](${p.url ?? siteUrl + "/#work"}) — ${p.category.en}, ${p.company}. ${p.description.en} (${p.tags.join(", ")})`)
+  .map((p) => `- [${p.name}](${p.url ?? siteUrl + "/#work"}) — ${p.category.en}, ${text(p.company, "en")}. ${p.description.en} (${p.tags.join(", ")})`)
   .join("\n")}
 
 ## Skills
@@ -45,7 +45,7 @@ ${stack.map((g) => `- ${g.group.en}: ${g.items.join(", ")}`).join("\n")}
 
 ## Education
 
-${education.map((e) => `- ${e.school} — ${e.degree.en} (${e.years})`).join("\n")}
+${education.map((e) => `- ${e.school} — ${e.degree.en} (${text(e.years, "en")})`).join("\n")}
 
 ## Languages
 

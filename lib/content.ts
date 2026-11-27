@@ -12,6 +12,12 @@ export const profile = {
   startYear: 2018,
 };
 
+/** Whole years since the first web job, fixed at build time. */
+export const yearsOfExperience = Number(process.env.BUILD_YEAR) - profile.startYear;
+
+/** Text that is either the same in every language or translated per language. */
+export const text = (v: string | T, lang: Lang) => (typeof v === "string" ? v : v[lang]);
+
 export const ui = {
   nav: {
     work: { en: "Work", tr: "Projeler", de: "Projekte" },
@@ -43,9 +49,9 @@ export const ui = {
     title2: { en: "people stream, shop", tr: "alışveriş yaptığın", de: "für Streaming, Shopping" },
     title3: { en: "and play on.", tr: "arayüzleri kodluyorum.", de: "und Spiele." },
     lead: {
-      en: "Computer engineer focused on React, Next.js and TypeScript. I've shipped music & video streaming, e-commerce and telecom products — and I care as much about architecture, tests and code quality as I do about pixels.",
-      tr: "React, Next.js ve TypeScript odaklı bilgisayar mühendisiyim. Müzik ve video yayın, e-ticaret ve telekom ürünleri geliştirdim; mimariye, teste ve kod kalitesine de pikseller kadar önem veriyorum.",
-      de: "Informatikingenieur mit Fokus auf React, Next.js und TypeScript. Ich habe Musik- und Video-Streaming-, E-Commerce- und Telekommunikationsprodukte ausgeliefert — und mir sind Architektur, Tests und Codequalität genauso wichtig wie Pixel.",
+      en: `Computer engineer working with React, Next.js and TypeScript for over ${yearsOfExperience} years. I build music & video streaming, e-commerce and telecom products end to end.`,
+      tr: `${yearsOfExperience} yılı aşkın süredir React, Next.js ve TypeScript ile çalışan bilgisayar mühendisiyim. Müzik ve video yayını, e-ticaret ve telekom ürünlerini uçtan uca geliştiriyorum.`,
+      de: `Informatikingenieur, seit über ${yearsOfExperience} Jahren mit React, Next.js und TypeScript. Ich entwickle Musik- und Video-Streaming-, E-Commerce- und Telekommunikationsprodukte von Anfang bis Ende.`,
     },
     ctaPrimary: { en: "Get in touch", tr: "İletişime geç", de: "Kontakt aufnehmen" },
     ctaSecondary: { en: "See my work", tr: "Projelere göz at", de: "Projekte ansehen" },
@@ -57,10 +63,10 @@ export const ui = {
     },
   },
   stats: [
-    { value: "7+", label: { en: "years shipping UI", tr: "yıl arayüz geliştirme", de: "Jahre UI-Entwicklung" } },
+    { value: `${yearsOfExperience}+`, label: { en: "years shipping UI", tr: "yıl arayüz geliştirme", de: "Jahre UI-Entwicklung" } },
     { value: "6", label: { en: "companies", tr: "şirket", de: "Unternehmen" } },
     { value: "8+", label: { en: "products in production", tr: "canlıdaki ürün", de: "Produkte live" } },
-    { value: "4", label: { en: "frameworks in prod", tr: "framework (canlıda)", de: "Frameworks im Einsatz" } },
+    { value: "4", label: { en: "frameworks in prod", tr: "canlıda kullanılan framework", de: "Frameworks im Einsatz" } },
   ],
   sections: {
     work: { en: "Selected work", tr: "Seçili projeler", de: "Ausgewählte Projekte" },
@@ -83,9 +89,9 @@ export const ui = {
     },
     contact: { en: "Let's build something", tr: "Birlikte bir şey yapalım", de: "Lassen Sie uns etwas bauen" },
     contactSub: {
-      en: "Open to frontend roles, freelance work and good conversations about UI architecture.",
-      tr: "Frontend pozisyonlarına, freelance işlere ve arayüz mimarisi üzerine sohbetlere açığım.",
-      de: "Offen für Frontend-Rollen, Freelance-Projekte und gute Gespräche über UI-Architektur.",
+      en: "Whether it's frontend, UI architecture or a new project — I'm always happy to talk.",
+      tr: "Frontend, arayüz mimarisi ya da yeni bir proje hakkında konuşmak istersen yazman yeterli.",
+      de: "Ob Frontend, UI-Architektur oder ein neues Projekt — schreiben Sie mir gern.",
     },
   },
   copy: { en: "Copy", tr: "Kopyala", de: "Kopieren" },
@@ -96,9 +102,9 @@ export const ui = {
   languages: { en: "Languages", tr: "Diller", de: "Sprachen" },
   localTime: { en: "Local time in Istanbul", tr: "İstanbul'da saat", de: "Ortszeit in Istanbul" },
   built: {
-    en: "Designed & built by Huseyin Sade with Next.js, TypeScript & SCSS.",
-    tr: "Huseyin Sade tarafından Next.js, TypeScript ve SCSS ile tasarlanıp geliştirildi.",
-    de: "Gestaltet & entwickelt von Huseyin Sade mit Next.js, TypeScript & SCSS.",
+    en: "Designed & built by Huseyin Sade with Next.js, TypeScript & SASS.",
+    tr: "Huseyin Sade tarafından Next.js, TypeScript ve SASS ile tasarlanıp geliştirildi.",
+    de: "Gestaltet & entwickelt von Huseyin Sade mit Next.js, TypeScript & SASS.",
   },
 } satisfies Record<string, unknown>;
 
@@ -107,7 +113,7 @@ export type Project = {
   url?: string;
   domain?: string;
   category: T;
-  company: string;
+  company: string | T;
   description: T;
   tags: string[];
   featured?: boolean;
@@ -121,9 +127,9 @@ export const projects: Project[] = [
     company: "Atmosware",
     category: { en: "Music, podcast & video streaming", tr: "Müzik, podcast ve video yayını", de: "Musik-, Podcast- & Video-Streaming" },
     description: {
-      en: "Turkcell's digital music platform. I drive frontend architecture decisions, built the fizy desktop app with Rust and Tauri, build the admin panel with Refine, integrated Mixpanel analytics, set up SonarQube and pre-commit quality gates, and review code across the team.",
-      tr: "Turkcell'in dijital müzik platformu. Frontend mimari kararlarını yönetiyorum; fizy masaüstü uygulamasını Rust ve Tauri ile geliştirdim, admin panelini Refine ile geliştiriyorum. Mixpanel analitiğini, SonarQube ve pre-commit kalite kontrollerini kurdum; ekipte code review yapıyorum.",
-      de: "Turkcells digitale Musikplattform. Ich treffe die Frontend-Architekturentscheidungen, habe die fizy-Desktop-App mit Rust und Tauri gebaut, entwickle das Admin-Panel mit Refine, habe Mixpanel-Analytics integriert, SonarQube und Pre-Commit-Qualitätsprüfungen eingeführt und mache Code-Reviews im Team.",
+      en: "Turkcell's music, podcast and video platform. I develop the fizy web app itself with Next.js and TypeScript and drive its frontend architecture. Alongside it, I built the fizy desktop app with Rust and Tauri and am building the admin panel with Refine. Mixpanel analytics, SonarQube and pre-commit quality gates, and team code review are part of the job too.",
+      tr: "Turkcell'in müzik, podcast ve video platformu. fizy'nin web uygulamasını Next.js ve TypeScript ile geliştiriyor, frontend mimarisini yönetiyorum. Bunun yanında fizy masaüstü uygulamasını Rust ve Tauri ile geliştirdim, admin panelini de Refine ile geliştiriyorum. Mixpanel analitiği, SonarQube ve pre-commit kalite kontrolleri ve ekip içi code review de işimin parçası.",
+      de: "Turkcells Musik-, Podcast- und Videoplattform. Ich entwickle die fizy-Web-App selbst mit Next.js und TypeScript und verantworte ihre Frontend-Architektur. Außerdem habe ich die fizy-Desktop-App mit Rust und Tauri gebaut und entwickle das Admin-Panel mit Refine. Mixpanel-Analytics, SonarQube- und Pre-Commit-Qualitätsprüfungen sowie Code-Reviews im Team gehören ebenfalls dazu.",
     },
     tags: ["Next.js", "TypeScript", "Tauri", "Rust", "Tailwind", "Redux", "tRPC", "Refine", "Mixpanel", "Cypress"],
     featured: true,
@@ -153,7 +159,7 @@ export const projects: Project[] = [
       tr: "LC Waikiki'nin e-ticaret sitesinde, ortak Storybook bileşen kütüphanesi üzerinde frontend geliştirme.",
       de: "Frontend-Entwicklung für den Onlineshop von LC Waikiki auf Basis einer gemeinsamen Storybook-Komponentenbibliothek.",
     },
-    tags: ["React", "TypeScript", "SCSS", "Redux", "Storybook"],
+    tags: ["React", "TypeScript", "SASS", "Redux", "Storybook"],
   },
   {
     name: "LC Waikiki Marketplace",
@@ -169,17 +175,17 @@ export const projects: Project[] = [
     tags: ["React", "TypeScript", "Material UI", "Storybook", "React Query", "Recharts"],
   },
   {
-    name: "fizz.ca",
+    name: "Fizz",
     url: "https://fizz.ca",
     domain: "fizz.ca",
     company: "Etiya",
     category: { en: "Telecom CMS & CRM", tr: "Telekom CMS ve CRM", de: "Telekom-CMS & CRM" },
     description: {
-      en: "CMS and CRM pages for a Canadian telecom operator.",
-      tr: "Kanadalı bir telekom operatörü için CMS ve CRM sayfaları.",
-      de: "CMS- und CRM-Seiten für einen kanadischen Telekommunikationsanbieter.",
+      en: "CMS and CRM interfaces for Fizz, Videotron's digital-first mobile and internet brand in Canada.",
+      tr: "Videotron'un Kanada'daki dijital mobil ve internet markası Fizz için CMS ve CRM arayüzleri.",
+      de: "CMS- und CRM-Oberflächen für Fizz, die digitale Mobilfunk- und Internetmarke von Videotron in Kanada.",
     },
-    tags: ["Angular", "TypeScript", "NgRx", "SCSS"],
+    tags: ["Angular", "TypeScript", "NgRx", "SASS"],
   },
   {
     name: "Maraton Academy",
@@ -196,20 +202,20 @@ export const projects: Project[] = [
   },
   {
     name: "Sculpturehead",
-    company: "Side project",
+    company: { en: "Side project", tr: "Kişisel proje", de: "Eigenes Projekt" },
     category: { en: "Image tool", tr: "Görsel aracı", de: "Bild-Tool" },
     description: {
       en: "Resizes images to Instagram post or story dimensions and renders them with color watermarks and text. React frontend on a Django backend.",
       tr: "Görselleri Instagram gönderi veya hikâye boyutuna getirip renkli filigran ve metinle işleyen araç. React arayüz, Django backend.",
       de: "Bringt Bilder auf Instagram-Post- oder Story-Format und versieht sie mit farbigen Wasserzeichen und Text. React-Frontend mit Django-Backend.",
     },
-    tags: ["React", "Django", "Canvas", "SCSS"],
+    tags: ["React", "Django", "Canvas", "SASS"],
   },
   {
     name: "Çayyolla",
     url: "https://cayyolla.com",
     domain: "cayyolla.com",
-    company: "Side project",
+    company: { en: "Side project", tr: "Kişisel proje", de: "Eigenes Projekt" },
     category: { en: "Mobile ordering", tr: "Mobil sipariş", de: "Mobile Bestellung" },
     description: {
       en: "Connects shops with tea sellers so orders flow without a phone call.",
@@ -239,12 +245,13 @@ export const jobs: Job[] = [
     role: { en: "Frontend Developer", tr: "Frontend Developer", de: "Frontend Developer" },
     start: "2024-08",
     summary: {
-      en: "Digital music, podcast and video streaming — fizy.",
-      tr: "Dijital müzik, podcast ve video yayını — fizy.",
-      de: "Digitales Musik-, Podcast- und Video-Streaming — fizy.",
+      en: "fizy — the web app, desktop app and admin panel for digital music, podcast and video streaming.",
+      tr: "fizy — dijital müzik, podcast ve video yayını için web uygulaması, masaüstü uygulaması ve admin paneli.",
+      de: "fizy — Web-App, Desktop-App und Admin-Panel für digitales Musik-, Podcast- und Video-Streaming.",
     },
     highlights: {
       en: [
+        "Develop the fizy web app (fizy.com) with Next.js and TypeScript",
         "Own frontend technical and architectural decisions",
         "Built the fizy desktop app with Rust and Tauri",
         "Building the fizy admin panel with Refine",
@@ -254,6 +261,7 @@ export const jobs: Job[] = [
         "Speed up refactors and test writing with Claude Code and Codex — every output goes through my own quality gates",
       ],
       tr: [
+        "fizy web uygulamasını (fizy.com) Next.js ve TypeScript ile geliştiriyorum",
         "Frontend teknik ve mimari kararların sahibiyim",
         "fizy masaüstü uygulamasını Rust ve Tauri ile geliştirdim",
         "fizy admin panelini Refine ile geliştiriyorum",
@@ -263,6 +271,7 @@ export const jobs: Job[] = [
         "Claude Code ve Codex ile refactor ve test üretimini hızlandırıyorum; çıktıları kendi kalite kontrollerimden geçiriyorum",
       ],
       de: [
+        "Entwicklung der fizy-Web-App (fizy.com) mit Next.js und TypeScript",
         "Verantwortlich für die technischen und architektonischen Frontend-Entscheidungen",
         "fizy-Desktop-App mit Rust und Tauri gebaut",
         "Entwicklung des fizy-Admin-Panels mit Refine",
@@ -285,6 +294,26 @@ export const jobs: Job[] = [
       tr: "Monorepo'da e-ticaret; iç Storybook tasarım sistemini geliştirdim.",
       de: "E-Commerce in einem Monorepo; internes Storybook-Designsystem aufgebaut.",
     },
+    highlights: {
+      en: [
+        "Built the project's internal Storybook design system",
+        "E-commerce frontend in a Next.js monorepo with Zustand",
+        "Frontend technical and architectural decisions",
+        "Code review, merge operations and Git branch management",
+      ],
+      tr: [
+        "Projenin iç Storybook tasarım sistemini geliştirdim",
+        "Next.js monorepo'da Zustand ile e-ticaret frontend'i",
+        "Frontend teknik ve mimari kararlar",
+        "Code review, merge süreçleri ve Git branch yönetimi",
+      ],
+      de: [
+        "Internes Storybook-Designsystem des Projekts aufgebaut",
+        "E-Commerce-Frontend in einem Next.js-Monorepo mit Zustand",
+        "Technische und architektonische Frontend-Entscheidungen",
+        "Code-Reviews, Merges und Git-Branch-Management",
+      ],
+    },
     tags: ["Next.js", "TypeScript", "Zustand", "SASS"],
   },
   {
@@ -298,6 +327,26 @@ export const jobs: Job[] = [
       tr: "TV+ yayın platformu — Shaka Player, Video.js ve Widevine DRM.",
       de: "TV+-Streaming — Shaka Player, Video.js und Widevine DRM.",
     },
+    highlights: {
+      en: [
+        "Video player layer with Shaka Player and Video.js",
+        "Media security: authentication, authorization and Widevine DRM",
+        "Frontend architecture decisions; unused CSS stripped with PurgeCSS",
+        "Code review, merge operations and Git branch management",
+      ],
+      tr: [
+        "Shaka Player ve Video.js ile video oynatıcı katmanı",
+        "Medya güvenliği: kimlik doğrulama, yetkilendirme ve Widevine DRM",
+        "Frontend mimari kararları; PurgeCSS ile kullanılmayan CSS'in temizlenmesi",
+        "Code review, merge süreçleri ve Git branch yönetimi",
+      ],
+      de: [
+        "Video-Player-Schicht mit Shaka Player und Video.js",
+        "Medienschutz: Authentifizierung, Autorisierung und Widevine DRM",
+        "Frontend-Architekturentscheidungen; ungenutztes CSS mit PurgeCSS entfernt",
+        "Code-Reviews, Merges und Git-Branch-Management",
+      ],
+    },
     tags: ["Next.js", "Ant Design", "Redux", "PurgeCSS"],
   },
   {
@@ -310,7 +359,30 @@ export const jobs: Job[] = [
       tr: "Atomic design ve Storybook ile lcw.com e-ticaret sitesi ve pazaryeri satıcı portalı.",
       de: "lcw.com-Onlineshop und Marktplatz-Verkäuferportal, mit Atomic Design und Storybook.",
     },
-    tags: ["React", "TypeScript", "Material UI", "Storybook", "SonarQube"],
+    highlights: {
+      en: [
+        "Frontend for lcw.com, LC Waikiki's e-commerce site",
+        "Built pages for the marketplace conversion and its seller portal",
+        "Storybook component library following atomic design",
+        "Data fetching with React Query, charts with Recharts",
+        "Code quality tracked in SonarQube; code review and Git branch management",
+      ],
+      tr: [
+        "LC Waikiki'nin e-ticaret sitesi lcw.com'un frontend'i",
+        "Pazaryeri dönüşümü ve satıcı portalı için sayfalar geliştirdim",
+        "Atomic design ile Storybook bileşen kütüphanesi",
+        "React Query ile veri yönetimi, Recharts ile grafikler",
+        "SonarQube ile kod kalitesi takibi; code review ve Git branch yönetimi",
+      ],
+      de: [
+        "Frontend für lcw.com, den Onlineshop von LC Waikiki",
+        "Seiten für die Marktplatz-Umstellung und das Verkäuferportal entwickelt",
+        "Storybook-Komponentenbibliothek nach Atomic Design",
+        "Datenabruf mit React Query, Diagramme mit Recharts",
+        "Codequalität mit SonarQube; Code-Reviews und Git-Branch-Management",
+      ],
+    },
+    tags: ["React", "TypeScript", "Material UI", "Redux", "React Query", "Recharts", "Storybook", "SonarQube"],
   },
   {
     company: "Hineks",
@@ -323,7 +395,27 @@ export const jobs: Job[] = [
       tr: "Ödeme entegrasyonu (iyzico), ürün ve sipariş yönetimi.",
       de: "Zahlungsintegration (iyzico), Produkt- und Bestellverwaltung.",
     },
-    tags: ["JavaScript", ".NET"],
+    highlights: {
+      en: [
+        "Payment integration with iyzico",
+        "Product and order management screens",
+        "Frontend architecture decisions",
+        "Code review, merge operations and Git branch management",
+      ],
+      tr: [
+        "iyzico ile ödeme entegrasyonu",
+        "Ürün ve sipariş yönetimi ekranları",
+        "Frontend mimari kararları",
+        "Code review, merge süreçleri ve Git branch yönetimi",
+      ],
+      de: [
+        "Zahlungsintegration mit iyzico",
+        "Oberflächen für Produkt- und Bestellverwaltung",
+        "Frontend-Architekturentscheidungen",
+        "Code-Reviews, Merges und Git-Branch-Management",
+      ],
+    },
+    tags: ["JavaScript", ".NET", "iyzico"],
   },
   {
     company: "Etiya",
@@ -332,11 +424,28 @@ export const jobs: Job[] = [
     end: "2020-05",
     location: "Istanbul",
     summary: {
-      en: "Telecom CMS for fizz.ca with atomic design.",
-      tr: "Atomic design ile fizz.ca için telekom CMS'i.",
-      de: "Telekom-CMS für fizz.ca nach Atomic Design.",
+      en: "Telecom CMS and CRM for Fizz (Videotron), built with atomic design.",
+      tr: "Atomic design ile Fizz (Videotron) için telekom CMS ve CRM'i.",
+      de: "Telekom-CMS und -CRM für Fizz (Videotron) nach Atomic Design.",
     },
-    tags: ["Angular", "TypeScript", "NgRx"],
+    highlights: {
+      en: [
+        "CMS and CRM interfaces for Fizz (fizz.ca), Videotron's digital mobile and internet brand",
+        "Angular 7+ with NgRx state management",
+        "UI built following atomic design",
+      ],
+      tr: [
+        "Videotron'un dijital mobil ve internet markası Fizz (fizz.ca) için CMS ve CRM arayüzleri",
+        "Angular 7+ ve NgRx ile state yönetimi",
+        "Atomic design ile arayüz geliştirme",
+      ],
+      de: [
+        "CMS- und CRM-Oberflächen für Fizz (fizz.ca), die digitale Mobilfunk- und Internetmarke von Videotron",
+        "Angular 7+ mit NgRx-State-Management",
+        "UI nach Atomic Design aufgebaut",
+      ],
+    },
+    tags: ["Angular", "TypeScript", "NgRx", "SASS"],
   },
   {
     company: "Hineks",
@@ -349,7 +458,24 @@ export const jobs: Job[] = [
       tr: "Gerçek zamanlı eğitim portalı ve sınav modülü.",
       de: "Echtzeit-Bildungsportal und Prüfungsmodul.",
     },
-    tags: ["Vue", "JavaScript", ".NET"],
+    highlights: {
+      en: [
+        "Realtime education portal (Maraton Academy) and live exam module",
+        "Payment integration with iyzico",
+        "Product and order management",
+      ],
+      tr: [
+        "Gerçek zamanlı eğitim portalı (Maraton Academy) ve canlı sınav modülü",
+        "iyzico ile ödeme entegrasyonu",
+        "Ürün ve sipariş yönetimi",
+      ],
+      de: [
+        "Echtzeit-Bildungsportal (Maraton Academy) und Live-Prüfungsmodul",
+        "Zahlungsintegration mit iyzico",
+        "Produkt- und Bestellverwaltung",
+      ],
+    },
+    tags: ["Vue", "JavaScript", ".NET", "iyzico"],
   },
   {
     company: "EXERT Bilgisayar",
@@ -362,6 +488,23 @@ export const jobs: Job[] = [
       tr: "Her şeyin başladığı yer — staj, ardından ilk web geliştirici rolüm.",
       de: "Wo alles begann — Praktikum, dann die erste Stelle als Webentwickler.",
     },
+    highlights: {
+      en: [
+        "Developed artisertifika.com and the company website exert.com.tr",
+        "Internship (Jan – Feb 2018)",
+        "Junior Web Developer (Mar – Sep 2018)",
+      ],
+      tr: [
+        "artisertifika.com ve şirket sitesi exert.com.tr'yi geliştirdim",
+        "Staj (Ocak – Şubat 2018)",
+        "Junior Web Developer (Mart – Eylül 2018)",
+      ],
+      de: [
+        "artisertifika.com und die Firmenwebsite exert.com.tr entwickelt",
+        "Praktikum (Jan. – Feb. 2018)",
+        "Junior Web Developer (März – Sept. 2018)",
+      ],
+    },
     tags: ["HTML", "CSS", "JavaScript"],
   },
 ];
@@ -373,7 +516,7 @@ export const stack: { group: T; items: string[]; wide?: boolean }[] = [
   },
   {
     group: { en: "Styling & UI", tr: "Stil ve UI", de: "Styling & UI" },
-    items: ["Tailwind CSS", "SCSS", "shadcn/ui", "Material UI", "Ant Design", "Chakra UI", "Refine"],
+    items: ["Tailwind CSS", "SASS", "shadcn/ui", "Material UI", "Ant Design", "Chakra UI", "Refine"],
   },
   {
     group: { en: "State & data", tr: "State ve veri", de: "State & Daten" },
@@ -398,15 +541,16 @@ export const stack: { group: T; items: string[]; wide?: boolean }[] = [
   },
 ];
 
-export const education: { school: string; degree: T; years: string }[] = [
+export const education: { school: string; degree: T; years: string | T; ongoing?: boolean }[] = [
   {
     school: "Sakarya University of Applied Sciences",
-    degree: { en: "Master's degree", tr: "Yüksek lisans", de: "Master-Abschluss" },
-    years: "2021",
+    degree: { en: "Master's studies, Automotive Engineering", tr: "Yüksek lisans eğitimi, Otomotiv Mühendisliği", de: "Masterstudium, Fahrzeugtechnik" },
+    years: { en: "2021 – Present", tr: "2021 – Halen", de: "2021 – heute" },
+    ongoing: true,
   },
   {
     school: "Sakarya University",
-    degree: { en: "B.Sc. Computer Engineering", tr: "Bilgisayar Mühendisliği, lisans", de: "B.Sc. Computer Engineering" },
+    degree: { en: "Bachelor's studies, Computer Engineering", tr: "Lisans eğitimi, Bilgisayar Mühendisliği", de: "Bachelorstudium, Computer Engineering" },
     years: "2015 – 2019",
   },
   {

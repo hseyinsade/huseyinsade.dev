@@ -1,12 +1,12 @@
 "use client";
 
-import { education, languages, stack, ui } from "@/lib/content";
+import { education, languages, stack, text, ui } from "@/lib/content";
 import { useSite } from "./providers";
 import { cx, Reveal, SectionHeader } from "./ui";
 import s from "./stack.module.scss";
 
 export function Stack() {
-  const { t } = useSite();
+  const { t, lang } = useSite();
 
   return (
     <section id="stack" className={s.section}>
@@ -37,7 +37,7 @@ export function Stack() {
                   <p className={s.strong}>{e.school}</p>
                   <p className={s.sub}>{t(e.degree)}</p>
                 </div>
-                <span className={s.aside}>{e.years}</span>
+                <span className={s.aside}>{text(e.years, lang)}</span>
               </li>
             ))}
           </ul>

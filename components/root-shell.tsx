@@ -30,7 +30,13 @@ export function metadataFor(lang: Lang): Metadata {
       locale,
       images: [{ url: `/og-${lang}.png`, width: 1200, height: 630, alt: title }],
     },
-    icons: { apple: "/apple-touch-icon.png" },
+    icons: {
+      icon: [
+        { url: "/icon.svg", type: "image/svg+xml" },
+        { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      ],
+      apple: "/apple-touch-icon.png",
+    },
     twitter: { card: "summary_large_image", title, description, images: [`/og-${lang}.png`] },
     authors: [{ name: "Huseyin Sade", url: siteUrl }],
     creator: "Huseyin Sade",
