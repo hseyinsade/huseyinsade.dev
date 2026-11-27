@@ -2,7 +2,7 @@
 
 Personal site of Huseyin Sade — Frontend Developer.
 
-Built with **Next.js 15 (App Router)**, **TypeScript** and **SCSS Modules**, exported as a fully static site.
+Built with **Next.js 16.4.6 (App Router)**, **TypeScript** and **SCSS Modules**, exported as a fully static site.
 
 ## Features
 
