@@ -162,7 +162,7 @@
               {
                 "type": "TEMPLATE",
                 "key": "arg1",
-                "value": "^(section_view|cta_click|nav_click|project_click|outbound_click|email_click|email_copy|phone_click|cv_download|contact_form_submit|contact_form_error|language_switch|theme_toggle|inspect_toggle|code_tab|consent_update)$"
+                "value": "^(section_view|cta_click|nav_click|project_click|outbound_click|email_click|email_copy|phone_click|contact_form_submit|contact_form_error|language_switch|theme_toggle|inspect_toggle|code_tab|consent_update)$"
               }
             ]
           }

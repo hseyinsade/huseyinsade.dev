@@ -14,7 +14,6 @@ Built with **Next.js 16.4.6 (App Router)**, **React 19**, **TypeScript** and **S
 - Analytics: Google Tag Manager with Consent Mode v2 and a consent banner; named `dataLayer` events for clicks and section views — setup guide in [`docs/analytics.md`](docs/analytics.md)
 - Contact: email, phone, and a form that saves each message in **Supabase** and emails it through [FormSubmit](https://formsubmit.co) (the first message sends a one-time activation email to the inbox)
 - **Supabase** (browser-only, publishable key + Row Level Security): contact messages and an "open to new projects" badge in the hero that changes without a rebuild — setup in [`docs/supabase.md`](docs/supabase.md), schema in `supabase/schema.sql`
-- CV download in the header, served from `public/huseyinsade-cv.pdf`
 - All content lives in [`lib/content.ts`](lib/content.ts)
 - Styles: global tokens and reset in `styles/globals.scss`, shared mixins in `styles/_mixins.scss`, one `*.module.scss` per component — no inline styles (a test checks every page)
 

@@ -1,12 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { Icon } from "@/components/atoms/Icon";
 import { InspectToggle } from "@/components/molecules/InspectToggle";
 import { LanguageSwitch } from "@/components/molecules/LanguageSwitch";
 import { ThemeToggle } from "@/components/molecules/ThemeToggle";
 import { useSite } from "@/components/providers";
-import { profile, ui } from "@/lib/content";
+import { ui } from "@/lib/content";
 import { cx } from "@/lib/cx";
 import s from "./Nav.module.scss";
 
@@ -66,10 +65,6 @@ export function Nav() {
         </ul>
 
         <div className={s.actions}>
-          <a href={profile.cv} download className={s.cv} aria-label={t(ui.cv)} data-track="cv_download">
-            <Icon name="download" />
-            <span>CV</span>
-          </a>
           <InspectToggle on={inspect} label={t(ui.inspect)} onToggle={() => setInspect((v) => !v)} />
           <LanguageSwitch value={lang} onChange={setLang} />
           <ThemeToggle theme={theme} onToggle={toggleTheme} />

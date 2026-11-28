@@ -6,8 +6,6 @@ export const profile = {
   name: "Huseyin Sade",
   email: "info@huseyinsade.dev",
   phone: "+90 555 067 04 36",
-  /** Path of the CV in `public/`. */
-  cv: "/huseyinsade-cv.pdf",
   github: "https://github.com/hseyinsade",
   githubHandle: "hseyinsade",
   linkedin: "https://www.linkedin.com/in/huseyinsade",
@@ -101,7 +99,6 @@ export const ui = {
       de: "Ob Frontend, UI-Architektur oder ein neues Projekt — schreiben Sie mir gern.",
     },
   },
-  cv: { en: "Download CV", tr: "CV indir", de: "Lebenslauf herunterladen" },
   phone: { en: "Phone", tr: "Telefon", de: "Telefon" },
   form: {
     name: { en: "Name", tr: "Adın", de: "Name" },

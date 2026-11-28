@@ -19,7 +19,6 @@ Konteyner kimliğini değiştirmek için: `NEXT_PUBLIC_GTM_ID` ortam değişkeni
 | `email_click`      | E-posta adresine tıklama                     | —                                         |
 | `email_copy`       | "Kopyala" butonu                             | —                                         |
 | `phone_click`      | Telefon numarasına tıklama                   | —                                         |
-| `cv_download`      | Header'daki CV indirme linki                 | —                                         |
 | `contact_form_submit` | İletişim formu gönderildi (mesaj sana ulaştı) | —                                     |
 | `contact_form_error`  | İletişim formu gönderilemedi               | —                                         |
 | `language_switch`  | EN / TR / DE değişimi                        | `label` (en, tr, de)                      |
@@ -58,7 +57,7 @@ onları GA4'e ileten etiketler yoksa GA4'e hiçbir şey ulaşmaz. Bütün kurulu
    - Değişkenler: `GA4 Measurement ID` ve beş *Veri Katmanı Değişkeni*
 3. **Ölçüm kimliği:** Dosyada `G-5F4D5PJZQT` olarak hazır (Değişkenler → `GA4 Measurement ID`). Başka bir mülke geçersen yalnızca bunu değiştir.
 4. **Önizle** ile siteyi aç, çerez banner'ında *İzin ver* de ve bir şeylere tıkla. Tag
-   Assistant'ta `cv_download`, `nav_click` gibi olayların altında *GA4 event - site events*
+   Assistant'ta `nav_click`, `project_click` gibi olayların altında *GA4 event - site events*
    etiketinin **tetiklendiğini** gör.
 5. **Gönder → Yayınla.** Yayınlamadan canlı sitede hiçbir şey çalışmaz.
 

@@ -19,7 +19,6 @@ export function GET() {
 - Website (German): ${siteUrl}${langPath.de}
 - Email: ${profile.email}
 - Phone: ${profile.phone}
-- CV: ${siteUrl}${profile.cv}
 - GitHub: ${profile.github}
 - LinkedIn: ${profile.linkedin}
 - Location: Istanbul, Türkiye
