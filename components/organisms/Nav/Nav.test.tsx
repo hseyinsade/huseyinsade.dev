@@ -8,8 +8,20 @@ describe("Nav", () => {
   it("links to every section in the page language", () => {
     renderWithSite(<Nav />, { lang: "tr" });
     const hrefs = screen.getAllByRole("link").map((a) => a.getAttribute("href"));
-    expect(hrefs).toEqual(["#top", ...navLinks.map((l) => `#${l.id}`)]);
+    expect(hrefs).toEqual(["#top", ...navLinks.map((l) => `#${l.id}`), "/huseyinsade-cv.pdf"]);
     expect(screen.getByRole("link", { name: "Deneyim" })).toBeInTheDocument();
+  });
+
+  it("shows the hs. wordmark", () => {
+    renderWithSite(<Nav />);
+    expect(screen.getByRole("link", { name: "Huseyin Sade — home" })).toHaveTextContent(/^hs\.$/);
+  });
+
+  it("offers the CV as a download", () => {
+    renderWithSite(<Nav />, { lang: "de" });
+    const cv = screen.getByRole("link", { name: "Lebenslauf herunterladen" });
+    expect(cv).toHaveAttribute("href", "/huseyinsade-cv.pdf");
+    expect(cv).toHaveAttribute("download");
   });
 
   it("marks the section in view as current", () => {

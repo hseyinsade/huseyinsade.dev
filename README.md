@@ -12,6 +12,9 @@ Built with **Next.js 16.4.6 (App Router)**, **React 19**, **TypeScript** and **S
 - Scroll reveal animations that respect `prefers-reduced-motion`
 - SEO / AEO: per-language titles and descriptions, hreflang, JSON-LD `ProfilePage` + `Person` (`lib/seo.ts`), generated `robots.txt`, `sitemap.xml`, `llms.txt`, and Open Graph images (`/og-en.png`, `/og-tr.png`, `/og-de.png`, rendered at build time from `lib/og.tsx`)
 - Analytics: Google Tag Manager with Consent Mode v2 and a consent banner; named `dataLayer` events for clicks and section views — setup guide in [`docs/analytics.md`](docs/analytics.md)
+- Contact: email, phone, and a form that saves each message in **Supabase** and emails it through [FormSubmit](https://formsubmit.co) (the first message sends a one-time activation email to the inbox)
+- **Supabase** (browser-only, publishable key + Row Level Security): contact messages and an "open to new projects" badge in the hero that changes without a rebuild — setup in [`docs/supabase.md`](docs/supabase.md), schema in `supabase/schema.sql`
+- CV download in the header, served from `public/huseyinsade-cv.pdf`
 - All content lives in [`lib/content.ts`](lib/content.ts)
 - Styles: global tokens and reset in `styles/globals.scss`, shared mixins in `styles/_mixins.scss`, one `*.module.scss` per component — no inline styles (a test checks every page)
 
@@ -23,13 +26,14 @@ Components follow [atomic design](https://atomicdesign.bradfrost.com/). Each liv
 components/
   atoms/        Icon, Tag, Reveal
   molecules/    TagList, SectionHeader, CopyButton, Clock, LanguageSwitch, ThemeToggle,
-                InspectToggle, SocialLinks, Waveform, VideoPlayer, ProjectCard, ProjectRow,
+                InspectToggle, SocialLinks, ContactForm, AvailabilityBadge, Waveform, VideoPlayer, ProjectCard, ProjectRow,
                 JobItem, StackGroup
   organisms/    Nav, Hero, CodeCard, Work, Experience, Stack, Contact, Footer,
                 Inspector, ConsentBanner
   templates/    HomePage, RootShell
   providers/    SiteProvider (language, theme, inspect mode), Analytics
-lib/            content, SEO, analytics and small helpers (date, cx, selector)
+lib/            content, SEO, analytics, Supabase + contact senders, small helpers (date, cx, selector)
+supabase/       schema.sql (tables + RLS)
 test/           Vitest setup and render helpers
 ```
 

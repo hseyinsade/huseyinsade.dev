@@ -5,6 +5,9 @@ type T = Record<Lang, string>;
 export const profile = {
   name: "Huseyin Sade",
   email: "info@huseyinsade.dev",
+  phone: "+90 555 067 04 36",
+  /** Path of the CV in `public/`. */
+  cv: "/huseyinsade-cv.pdf",
   github: "https://github.com/hseyinsade",
   githubHandle: "hseyinsade",
   linkedin: "https://www.linkedin.com/in/huseyinsade",
@@ -42,6 +45,10 @@ export const ui = {
     en: "Inspect mode on — hover anything. Press I to exit.",
     tr: "İnceleme modu açık — bir öğenin üzerine gel. Çıkmak için I.",
     de: "Untersuchen-Modus aktiv — fahren Sie über ein Element. Mit I beenden.",
+  },
+  availability: {
+    open: { en: "Open to new projects", tr: "Yeni projelere açığım", de: "Offen für neue Projekte" },
+    busy: { en: "Not taking new projects", tr: "Şu an yeni proje almıyorum", de: "Derzeit keine neuen Projekte" },
   },
   hero: {
     eyebrow: { en: "Frontend Developer · Istanbul, TR", tr: "Frontend Developer · İstanbul", de: "Frontend Developer · Istanbul, TR" },
@@ -93,6 +100,26 @@ export const ui = {
       tr: "Frontend, arayüz mimarisi ya da yeni bir proje hakkında konuşmak istersen yazman yeterli.",
       de: "Ob Frontend, UI-Architektur oder ein neues Projekt — schreiben Sie mir gern.",
     },
+  },
+  cv: { en: "Download CV", tr: "CV indir", de: "Lebenslauf herunterladen" },
+  phone: { en: "Phone", tr: "Telefon", de: "Telefon" },
+  form: {
+    name: { en: "Name", tr: "Adın", de: "Name" },
+    email: { en: "Your email", tr: "E-posta adresin", de: "Ihre E-Mail" },
+    message: { en: "Message", tr: "Mesajın", de: "Nachricht" },
+    send: { en: "Send message", tr: "Gönder", de: "Nachricht senden" },
+    sending: { en: "Sending…", tr: "Gönderiliyor…", de: "Wird gesendet…" },
+    sent: {
+      en: "Thanks, your message reached me. I'll get back to you soon.",
+      tr: "Teşekkürler, mesajın bana ulaştı. En kısa sürede dönüş yapacağım.",
+      de: "Danke, Ihre Nachricht ist angekommen. Ich melde mich bald.",
+    },
+    error: {
+      en: "Something went wrong. Please try again, or write to the address above.",
+      tr: "Bir sorun oldu. Tekrar dene ya da yukarıdaki adrese yaz.",
+      de: "Etwas ist schiefgelaufen. Bitte erneut versuchen oder an die Adresse oben schreiben.",
+    },
+    subject: { en: "Message from huseyinsade.dev", tr: "huseyinsade.dev üzerinden mesaj", de: "Nachricht über huseyinsade.dev" },
   },
   copy: { en: "Copy", tr: "Kopyala", de: "Kopieren" },
   copied: { en: "Copied", tr: "Kopyalandı", de: "Kopiert" },

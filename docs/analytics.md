@@ -18,6 +18,10 @@ Konteyner kimliğini değiştirmek için: `NEXT_PUBLIC_GTM_ID` ortam değişkeni
 | `outbound_click`   | GitHub / LinkedIn / Links                    | `label`, `link_url`                       |
 | `email_click`      | E-posta adresine tıklama                     | —                                         |
 | `email_copy`       | "Kopyala" butonu                             | —                                         |
+| `phone_click`      | Telefon numarasına tıklama                   | —                                         |
+| `cv_download`      | Header'daki CV indirme linki                 | —                                         |
+| `contact_form_submit` | İletişim formu gönderildi (mesaj sana ulaştı) | —                                     |
+| `contact_form_error`  | İletişim formu gönderilemedi               | —                                         |
 | `language_switch`  | EN / TR / DE değişimi                        | `label` (en, tr, de)                      |
 | `theme_toggle`     | Açık / koyu tema                             | `label` (yeni tema)                       |
 | `inspect_toggle`   | İnceleme modu                                | `label` (on, off)                         |
@@ -38,20 +42,28 @@ Her olayda `page_language` (en / tr / de) da gönderilir.
 
 ## GTM'de yapılacaklar
 
-1. **GA4 mülkü oluştur** (analytics.google.com) ve Ölçüm Kimliğini al (`G-XXXXXXXXXX`).
-2. **Google Etiketi:** Etiketler → Yeni → *Google Etiketi* → Etiket kimliği: `G-XXXXXXXXXX`
-   → Tetikleyici: *Initialization - All Pages*.
-3. **Veri Katmanı Değişkenleri:** Değişkenler → Yeni → *Veri Katmanı Değişkeni*, şu adlarla
-   birer tane: `label`, `link_url`, `section`, `page_language`.
-4. **Tetikleyici:** Tetikleyiciler → Yeni → *Özel Etkinlik* →
-   Etkinlik adı: `^(section_view|cta_click|nav_click|project_click|outbound_click|email_click|email_copy|language_switch|theme_toggle|inspect_toggle|code_tab)$`
-   → *Normal ifade eşleşmesi kullan* işaretli.
-5. **GA4 Etkinlik etiketi:** Etiketler → Yeni → *Google Analytics: GA4 Etkinliği* →
-   Ölçüm kimliği: `G-XXXXXXXXXX` → Etkinlik adı: `{{Event}}` →
-   Etkinlik parametreleri: `label` = `{{label}}`, `link_url` = `{{link_url}}`,
-   `section` = `{{section}}`, `page_language` = `{{page_language}}` →
-   Tetikleyici: 4. adımdaki.
-6. **Önizle** ile siteyi açıp olayların geldiğini kontrol et, sonra **Gönder / Yayınla**.
+GTM tek başına bir şey kaydetmez: site olayları `dataLayer`'a gönderir, ama GTM'de
+onları GA4'e ileten etiketler yoksa GA4'e hiçbir şey ulaşmaz. Bütün kurulum
+[`gtm-container.json`](gtm-container.json) dosyasında hazır.
+
+1. **GA4 mülkü oluştur** (analytics.google.com → Yönetici → Oluştur → Mülk), bir
+   *Web* veri akışı ekle (`https://huseyinsade.dev`) ve Ölçüm Kimliğini kopyala (`G-XXXXXXXXXX`).
+2. **İçe aktar:** GTM → Yönetici → *Kapsayıcıyı İçe Aktar* → `docs/gtm-container.json`
+   → Çalışma alanı: *Mevcut* (Default Workspace) → **Birleştir** → *Çakışan öğeleri yeniden adlandır*
+   → Onayla. Gelenler:
+   - Etiket **Google tag - GA4** (Initialization - All Pages)
+   - Etiket **GA4 event - site events** (olay adı `{{Event}}`, parametreler `label`,
+     `link_url`, `section`, `page_language`, `consent`)
+   - Tetikleyici **CE - site events** (sitedeki tüm olaylar, normal ifade ile)
+   - Değişkenler: `GA4 Measurement ID` ve beş *Veri Katmanı Değişkeni*
+3. **Ölçüm kimliği:** Dosyada `G-5F4D5PJZQT` olarak hazır (Değişkenler → `GA4 Measurement ID`). Başka bir mülke geçersen yalnızca bunu değiştir.
+4. **Önizle** ile siteyi aç, çerez banner'ında *İzin ver* de ve bir şeylere tıkla. Tag
+   Assistant'ta `cv_download`, `nav_click` gibi olayların altında *GA4 event - site events*
+   etiketinin **tetiklendiğini** gör.
+5. **Gönder → Yayınla.** Yayınlamadan canlı sitede hiçbir şey çalışmaz.
+
+Kontrol: GA4 → Raporlar → **Gerçek zamanlı** ekranında olaylar birkaç saniyede görünür.
+Standart raporlara düşmesi 24–48 saat sürebilir.
 
 ## GA4'te yapılacaklar
 

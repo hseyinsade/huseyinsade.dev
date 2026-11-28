@@ -1,14 +1,27 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import { AvailabilityBadge } from "@/components/molecules/AvailabilityBadge";
 import { SocialLinks } from "@/components/molecules/SocialLinks";
 import { CodeCard } from "@/components/organisms/CodeCard";
 import { useSite } from "@/components/providers";
 import { ui } from "@/lib/content";
 import { cx } from "@/lib/cx";
+import { fetchAvailability } from "@/lib/supabase";
 import s from "./Hero.module.scss";
 
 export function Hero() {
   const { t } = useSite();
+  // Lives in Supabase so it can change without a rebuild; hidden until it loads.
+  const [available, setAvailable] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    let active = true;
+    fetchAvailability().then((v) => active && setAvailable(v));
+    return () => {
+      active = false;
+    };
+  }, []);
 
   return (
     <section id="top" className={s.hero}>
@@ -20,6 +33,9 @@ export function Hero() {
           <p className={s.eyebrow}>
             <span className={cx("live-dot", s.dot)} />
             {t(ui.hero.eyebrow)}
+            {available !== null && (
+              <AvailabilityBadge available={available} label={t(available ? ui.availability.open : ui.availability.busy)} />
+            )}
           </p>
 
           <h1 className={s.title}>

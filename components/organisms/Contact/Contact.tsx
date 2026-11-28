@@ -2,18 +2,21 @@
 
 import { Icon } from "@/components/atoms/Icon";
 import { Reveal } from "@/components/atoms/Reveal";
+import { ContactForm } from "@/components/molecules/ContactForm";
 import { CopyButton } from "@/components/molecules/CopyButton";
 import { useSite } from "@/components/providers";
-import { profile, ui } from "@/lib/content";
+import { sendContact } from "@/lib/contact";
+import { profile, text, ui } from "@/lib/content";
 import s from "./Contact.module.scss";
 
 const links = [
-  { label: "GitHub", handle: `@${profile.githubHandle}`, href: profile.github },
-  { label: "LinkedIn", handle: `in/${profile.linkedinHandle}`, href: profile.linkedin },
+  { id: "github", label: "GitHub", handle: `@${profile.githubHandle}`, href: profile.github, external: true },
+  { id: "linkedin", label: "LinkedIn", handle: `in/${profile.linkedinHandle}`, href: profile.linkedin, external: true },
+  { id: "phone", label: ui.phone, handle: profile.phone, href: `tel:${profile.phone.replace(/ /g, "")}`, external: false },
 ];
 
 export function Contact() {
-  const { t } = useSite();
+  const { t, lang } = useSite();
 
   return (
     <section id="contact" className={s.section}>
@@ -37,15 +40,35 @@ export function Contact() {
             <CopyButton value={profile.email} label={t(ui.copy)} copiedLabel={t(ui.copied)} track="email_copy" />
           </div>
 
+          <div className={s.form}>
+            <ContactForm
+              onSend={(msg) => sendContact(msg, { to: profile.email, subject: t(ui.form.subject), lang })}
+              labels={{
+                name: t(ui.form.name),
+                email: t(ui.form.email),
+                message: t(ui.form.message),
+                send: t(ui.form.send),
+                sending: t(ui.form.sending),
+                sent: t(ui.form.sent),
+                error: t(ui.form.error),
+              }}
+            />
+          </div>
+
           <ul className={s.links}>
             {links.map((l) => (
-              <li key={l.label}>
-                <a href={l.href} target="_blank" rel="noreferrer" data-track="outbound_click" data-track-label={l.label}>
+              <li key={l.id}>
+                <a
+                  href={l.href}
+                  {...(l.external
+                    ? { target: "_blank", rel: "noreferrer", "data-track": "outbound_click", "data-track-label": l.label }
+                    : { "data-track": "phone_click" })}
+                >
                   <span>
-                    <span className={s.linkLabel}>{l.label}</span>
+                    <span className={s.linkLabel}>{text(l.label, lang)}</span>
                     <span className={s.linkHandle}>{l.handle}</span>
                   </span>
-                  <Icon name="arrow-up-right" />
+                  {l.external && <Icon name="arrow-up-right" />}
                 </a>
               </li>
             ))}

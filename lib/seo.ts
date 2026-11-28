@@ -48,6 +48,7 @@ export function profileJsonLd(lang: Lang) {
     alternateName: ["Hüseyin Sade", "Huseyin SADE"],
     url: siteUrl + "/",
     email: `mailto:${profile.email}`,
+    telephone: profile.phone.replace(/ /g, ""),
     jobTitle: "Frontend Developer",
     description: pageMeta[lang].description,
     worksFor: {

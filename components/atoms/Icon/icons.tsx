@@ -8,6 +8,10 @@ export const icons = {
     viewBox: "0 0 16 16",
     body: <path d="m3 8.5 3 3 7-7" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" fill="none" />,
   },
+  download: {
+    viewBox: "0 0 16 16",
+    body: <path d="M8 2.5v8M4.5 7 8 10.5 11.5 7M3 13.5h10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" fill="none" />,
+  },
   copy: {
     viewBox: "0 0 16 16",
     body: (

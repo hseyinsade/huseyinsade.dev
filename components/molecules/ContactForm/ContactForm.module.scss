@@ -1,0 +1,109 @@
+@use "../../../styles/mixins" as *;
+
+.form {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+}
+
+.row {
+  display: grid;
+  gap: 1rem;
+
+  @include sm {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 0.5rem;
+
+  span {
+    @include mono;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--line);
+    border-radius: 0.75rem;
+    background: var(--bg);
+    color: var(--fg);
+    font: inherit;
+    font-size: 0.9375rem;
+    transition: border-color 0.15s;
+
+    &:hover {
+      border-color: var(--muted);
+    }
+
+    &:focus-visible {
+      border-color: var(--accent-ink);
+      outline: none;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 8rem;
+  }
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem 1rem;
+}
+
+.submit {
+  display: inline-flex;
+  height: 3rem;
+  align-items: center;
+  gap: 0.5rem;
+  padding-inline: 1.5rem;
+  border-radius: 999px;
+  background: var(--fg);
+  color: var(--bg);
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition:
+    transform 0.15s,
+    opacity 0.15s;
+
+  &:hover:not(:disabled) {
+    transform: translateY(-2px);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: progress;
+  }
+}
+
+.status {
+  font-size: 0.8125rem;
+  color: var(--muted);
+
+  &.sent {
+    color: var(--accent-ink);
+  }
+
+  &.error {
+    color: var(--danger);
+  }
+}
+
+.honeypot {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  opacity: 0;
+  pointer-events: none;
+}

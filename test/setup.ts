@@ -44,3 +44,8 @@ Object.defineProperty(navigator, "clipboard", {
   configurable: true,
   value: { writeText: () => Promise.resolve() },
 });
+
+// No test may hit the network: fetch answers with an empty list unless a test mocks it.
+beforeEach(() => {
+  vi.spyOn(globalThis, "fetch").mockImplementation(async () => new Response("[]", { status: 200 }));
+});
